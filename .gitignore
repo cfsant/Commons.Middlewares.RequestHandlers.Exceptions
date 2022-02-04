@@ -1,1 +1,5 @@
 /.vs
+/Commons.Middlewares.RequestHandlers.Exceptions/bin
+/Commons.Middlewares.RequestHandlers.Exceptions/obj
+/Commons.Middlewares.RequestHandlers.Exceptions.Tests/bin
+/Commons.Middlewares.RequestHandlers.Exceptions.Tests/obj
