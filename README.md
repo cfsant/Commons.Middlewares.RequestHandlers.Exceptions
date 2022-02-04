@@ -1,3 +1,17 @@
+# [Commons.Middlewares.RequestHandlers.Exceptions.Tests]
+#
+# STEPS:
+#
+# 1. DOTNET RESTORE:
+dotnet restore .\Commons.Middlewares.RequestHandlers.Exceptions.Tests\Commons.Middlewares.RequestHandlers.Exceptions.Tests.csproj
+#
+# 2. DOTNET BUILD:
+dotnet build --no-restore .\Commons.Middlewares.RequestHandlers.Exceptions.Tests\Commons.Middlewares.RequestHandlers.Exceptions.Tests.csproj
+#
+# 3. DOTNET TEST:
+dotnet test
+#
+# [Commons.Middlewares.RequestHandlers.Exceptions]
 #
 # STEPS:
 #
