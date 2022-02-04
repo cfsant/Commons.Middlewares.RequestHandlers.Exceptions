@@ -1,0 +1,30 @@
+name: CFSant.Commons.Middlewares.RequestHandlers.Exceptions
+
+on:
+  push:
+    branches: [release]
+  pull_request:
+    branches: [release]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    env:
+      NAME: CFSant.Commons.Middlewares.RequestHandlers.Exceptions
+      VERSION: 1.0.0
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 5.0.402
+      - name: Restore dependencies
+        run: dotnet restore ./Commons.Middlewares.RequestHandlers.Exceptions.csproj
+      - name: Build
+        run: dotnet build --no-restore ./Commons.Middlewares.RequestHandlers.Exceptions.csproj
+      - name: Pack
+        run: dotnet pack -o ./ ./Commons.Middlewares.RequestHandlers.Exceptions.csproj -p:IncludeSymbols=true -p:SymbolPackageFormat=snupkg
+      - name: Publish
+        run: nuget push ./Commons.Middlewares.RequestHandlers.Exceptions.${{env.VERSION}}.nupkg -Source 'https://api.nuget.org/v3/index.json' -ApiKey ${{secrets.MAIN}} -SkipDuplicate
