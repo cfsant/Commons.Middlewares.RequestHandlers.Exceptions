@@ -2,10 +2,15 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <ProjectGuid>e5e518b0-2ee3-4cd3-ba5d-02c1b032bc40</ProjectGuid>
   </PropertyGroup>
 
   <ItemGroup>
     <None Include=".github\workflows\dotnet.yml" />
+  </ItemGroup>
+   
+   <ItemGroup>
+    <None Include=".github\workflows\sonar.yml" />
   </ItemGroup>
 
 </Project>
