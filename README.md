@@ -1,17 +1,17 @@
 ## README.md
 
-**[Repositories]:**
-[Github](https://github.com/cfsant/Commons.Middlewares.RequestHandlers.Exceptions)
-[Nuget](https://www.nuget.org/packages/Commons.Middlewares.RequestHandlers.Exceptions/)
+**[Repositories]:** <br/>
+— [Github](https://github.com/cfsant/Commons.Middlewares.RequestHandlers.Exceptions) <br/>
+— [Nuget](https://www.nuget.org/packages/Commons.Middlewares.RequestHandlers.Exceptions/) <br/>
 
 
 **[Description]:**
 This library contains the definitions of exceptions known by the request handler.
 
 **[Types defined]:**
-> InternalException;<br/>
-> DeveloperInternalException;<br/>
-> ProductionInternalException;<br/>
+— InternalException;<br/>
+— DeveloperInternalException;<br/>
+— ProductionInternalException;<br/>
 
 **[xUnit]:**
 
