@@ -23,16 +23,16 @@ jobs:
         with:
           dotnet-version: 5.0.402
       - name: Restore dependencies - TESTS
-        run: dotnet restore .\${{env.APP_TEST}}\${{env.APP_TEST}}.csproj
+        run: dotnet restore ./${{env.APP_TEST}}/${{env.APP_TEST}}.csproj
       - name: Build - TESTS
-        run: dotnet build --no-restore .\${{env.APP_TEST}}\${{env.APP_TEST}}.csproj
+        run: dotnet build --no-restore ./${{env.APP_TEST}}/${{env.APP_TEST}}.csproj
       - name: Run - TESTS
         run: dotnet test
       - name: Restore dependencies
-        run: dotnet restore .\${{env.APP}}\${{env.APP}}.csproj
+        run: dotnet restore ./${{env.APP}}/${{env.APP}}.csproj
       - name: Build
-        run: dotnet build --no-restore .\${{env.APP}}\${{env.APP}}.csproj
+        run: dotnet build --no-restore ./${{env.APP}}/${{env.APP}}.csproj
       - name: Pack
-        run: dotnet pack -o ./ .\${{env.APP}}\${{env.APP}}.csproj -p:IncludeSymbols=true -p:SymbolPackageFormat=snupkg
+        run: dotnet pack -o ./ ./${{env.APP}}/${{env.APP}}.csproj -p:IncludeSymbols=true -p:SymbolPackageFormat=snupkg
       - name: Publish
-        run: nuget push ./${{env.APP}}.${{env.VERSION}}.nupkg -Source 'https://api.nuget.org/v3/index.json' -ApiKey ${{secrets.MAIN}} -SkipDuplicate
+        run: nuget push ./${{env.APP}}./${{env.VERSION}}.nupkg -Source 'https://api.nuget.org/v3/index.json' -ApiKey ${{secrets.MAIN}} -SkipDuplicate
