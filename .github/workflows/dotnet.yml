@@ -22,16 +22,37 @@ jobs:
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: 5.0.402
+      - name: Cache SonarCloud packages
+        uses: actions/cache@v1
+        with:
+          path: ~\sonar\cache
+          key: ${{ runner.os }}-sonar
+          restore-keys: ${{ runner.os }}-sonar
+      - name: Install SonarCloud scanner
+        if: steps.cache-sonar-scanner.outputs.cache-hit != 'true'
+        shell: powershell
+        run: |
+          New-Item -Path .\.sonar\scanner -ItemType Directory
+          dotnet tool update dotnet-sonarscanner --tool-path .\.sonar\scanner
+      - name: Build and analyze
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      shell: powershell
+        run: |
+          .\.sonar\scanner\dotnet-sonarscanner begin /k:"cfsant_Commons.Middlewares.RequestHandlers.Exceptions" /o:"cfsant" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
+          <insert_your_clean_build_command>
+          .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
+      - name: Restore dependencies
+        run: dotnet restore ./${{env.APP}}/${{env.APP}}.csproj
+      - name: Build
+        run: dotnet build --no-restore ./${{env.APP}}/${{env.APP}}.csproj
       - name: Restore dependencies - TESTS
         run: dotnet restore ./${{env.APP_TEST}}/${{env.APP_TEST}}.csproj
       - name: Build - TESTS
         run: dotnet build --no-restore ./${{env.APP_TEST}}/${{env.APP_TEST}}.csproj
       - name: Run - TESTS
         run: dotnet test
-      - name: Restore dependencies
-        run: dotnet restore ./${{env.APP}}/${{env.APP}}.csproj
-      - name: Build
-        run: dotnet build --no-restore ./${{env.APP}}/${{env.APP}}.csproj
       - name: Pack
         run: dotnet pack -o ./ ./${{env.APP}}/${{env.APP}}.csproj -p:IncludeSymbols=true -p:SymbolPackageFormat=snupkg
       - name: Publish
