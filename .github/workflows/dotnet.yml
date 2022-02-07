@@ -1,0 +1,38 @@
+name: CFSant.${{env.APP}}
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    env:
+      NAME: CFSant.${{env.APP}}
+      VERSION: 1.0.0
+	  APP_TEST: ${{env.APP_TEST}}
+	  APP: ${{env.APP}}
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 5.0.402
+	  - name: Restore dependencies - TESTS
+        run: dotnet restore .\${{env.APP_TEST}}\${{env.APP_TEST}}.csproj
+	  - name: Build - TESTS
+        run: dotnet build --no-restore .\${{env.APP_TEST}}\${{env.APP_TEST}}.csproj
+	  - name: Run - TESTS
+        run: dotnet test
+      - name: Restore dependencies
+        run: dotnet restore .\${{env.APP}}\${{env.APP}}.csproj
+      - name: Build
+        run: dotnet build --no-restore .\${{env.APP}}\${{env.APP}}.csproj
+      - name: Pack
+        run: dotnet pack -o ./ .\${{env.APP}}\${{env.APP}}.csproj -p:IncludeSymbols=true -p:SymbolPackageFormat=snupkg
+      - name: Publish
+        run: nuget push ./${{env.APP}}.${{env.VERSION}}.nupkg -Source 'https://api.nuget.org/v3/index.json' -ApiKey ${{secrets.MAIN}} -SkipDuplicate
