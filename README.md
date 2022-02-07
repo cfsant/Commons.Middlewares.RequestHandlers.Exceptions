@@ -8,7 +8,7 @@
 **[Description]:**
 This library contains the definitions of exceptions known by the request handler.
 
-**[Types defined]:**
+**[Types defined]:** <br/>
 — InternalException;<br/>
 — DeveloperInternalException;<br/>
 — ProductionInternalException;<br/>
