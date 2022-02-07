@@ -22,11 +22,11 @@ jobs:
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: 5.0.402
-	  - name: Restore dependencies - TESTS
+      - name: Restore dependencies - TESTS
         run: dotnet restore .\${{env.APP_TEST}}\${{env.APP_TEST}}.csproj
-	  - name: Build - TESTS
+      - name: Build - TESTS
         run: dotnet build --no-restore .\${{env.APP_TEST}}\${{env.APP_TEST}}.csproj
-	  - name: Run - TESTS
+      - name: Run - TESTS
         run: dotnet test
       - name: Restore dependencies
         run: dotnet restore .\${{env.APP}}\${{env.APP}}.csproj
