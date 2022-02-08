@@ -8,9 +8,9 @@
 This library contains the definitions of exceptions known by the request handler.
 
 **[Types defined]:** <br/>
-— InternalException;<br/>
-— DeveloperInternalException;<br/>
-— ProductionInternalException;<br/>
+— InternalException { Message: "" };<br/>
+— DeveloperInternalException { Message: "", InnerException: {}, StackTrace: "" };<br/>
+— ProductionInternalException { Message: "", Detail: "" };<br/>
 
 **[xUnit]:**
 

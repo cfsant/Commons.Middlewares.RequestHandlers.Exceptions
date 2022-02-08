@@ -10,7 +10,9 @@ namespace Commons.Middlewares.RequestHandlers.Exceptions
 
         }
 
+#nullable enable
         public DeveloperInternalException(string message, Exception? exception, string stackTrace)
+#nullable disable
         {
             Message = message;
             InnerException = exception;
