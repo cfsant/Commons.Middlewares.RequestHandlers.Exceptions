@@ -1,59 +1,45 @@
-## README.md
+## Commons.Middlewares.RequestHandlers.Exceptions
 
 **[Repositories]:** <br/>
 — [Github](https://github.com/cfsant/Commons.Middlewares.RequestHandlers.Exceptions) <br/>
 — [Nuget](https://www.nuget.org/packages/Commons.Middlewares.RequestHandlers.Exceptions/) <br/>
 
-**[Description]:**
-This library contains the definitions of exceptions known by the request handler.
+
+**[Description]:** <br/>
+This library contains the definitions of exceptions known by the request handler. <br/>
+
+
+**[SonarScanner]:** <br/>
+Code review through SonarCloud API integrated with SonarScanner via Github Actions. <br/>
+
 
 **[Types defined]:** <br/>
-— InternalException { Message: "" };<br/>
-— DeveloperInternalException { Message: "", InnerException: {}, StackTrace: "" };<br/>
-— ProductionInternalException { Message: "", Detail: "" };<br/>
+— InternalException &nbsp;&nbsp; [&nbsp;*json { Message: "" }*&nbsp;];<br/>
+— DeveloperInternalException &nbsp;&nbsp; [&nbsp;*json { Message: "", InnerException: {}, StackTrace: "" }*&nbsp;];<br/>
+— ProductionInternalException &nbsp; [ *json { Message: "", Detail: "" }* ];<br/>
 
-**[xUnit]:**
 
-1. DOTNET RESTORE:
-
-```
-dotnet restore .\Commons.Middlewares.RequestHandlers.Exceptions.Tests\Commons.Middlewares.RequestHandlers.Exceptions.Tests.csproj
-```
-
-2. DOTNET BUILD:
-
-```
-dotnet build --no-restore .\Commons.Middlewares.RequestHandlers.Exceptions.Tests\Commons.Middlewares.RequestHandlers.Exceptions.Tests.csproj
-```
-
-3. DOTNET TEST:
-
-```
-dotnet test
-```
-
-**[Commons.Middlewares.RequestHandlers.Exceptions]:**
-
-1. DOTNET RESTORE:
+**[Commons.Middlewares.RequestHandlers.Exceptions]:** <br/>
+To compile the code library, run the commands below: <br/>
 
 ```
 dotnet restore .\Commons.Middlewares.RequestHandlers.Exceptions\Commons.Middlewares.RequestHandlers.Exceptions.csproj
-```
-
-2. DOTNET BUILD:
-
-```
 dotnet build --no-restore .\Commons.Middlewares.RequestHandlers.Exceptions\Commons.Middlewares.RequestHandlers.Exceptions.csproj -p:Version=${{env.VERSION}}
 ```
 
-3. DOTNET PACK:
+**[Commons.Middlewares.RequestHandlers.Exceptions.Tests (xUnit)]:**<br/>
+To run the library xUnit tests, run the commands below: <br/>
+
+```
+dotnet restore .\Commons.Middlewares.RequestHandlers.Exceptions.Tests\Commons.Middlewares.RequestHandlers.Exceptions.Tests.csproj <br/>
+dotnet build --no-restore .\Commons.Middlewares.RequestHandlers.Exceptions.Tests\Commons.Middlewares.RequestHandlers.Exceptions.Tests.csproj <br/>
+dotnet test
+```
+
+**[Pack & Push (.nupkg):]** <br/>
+To package the code library and publish the .nupkg package, run the commands below: <br/>
 
 ```
 dotnet pack -o ./ .\Commons.Middlewares.RequestHandlers.Exceptions\Commons.Middlewares.RequestHandlers.Exceptions.csproj -p:IncludeSymbols=true -p:SymbolPackageFormat=snupkg -p:PackageVersion=${{env.VERSION}}
-```
-
-4. NUGET PUSH:
-
-```
 nuget push ./Commons.Middlewares.RequestHandlers.Exceptions.${{env.VERSION}}.nupkg -Source 'https://api.nuget.org/v3/index.json' -ApiKey ${{secrets.MAIN}} -SkipDuplicate
 ```
